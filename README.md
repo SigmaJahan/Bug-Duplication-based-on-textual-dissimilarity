@@ -1,92 +1,111 @@
-# Does Textual Dissimilarity Hinder Duplicate Bug Report Detection An Empirical Study  Replication Package
+
+Project Title: Does Textual Dissimilarity Hinder Duplicate Bug Report Detection? An Empirical Study
+
+Motivation: Course project of CSCI6308 (Software Maintenance and Evolution)
+
+Project Description: Duplicate bug reports pose a major overhead during software maintenance since they cost valuable development time and resources. Over the last decade, many automated techniques used Natural Language Processing, Information Retrieval, and Machine Learning methods to detect duplicate bug reports. They often leverage the textual similarity between any two given bug reports to determine their duplication. However, duplicate bug reports are not always guaranteed to be textually similar since many duplicate bugs have different symptoms (i.e., reported differently) but with the same root cause. As a result, the existing techniques might not be sufficient to deal with textually dissimilar duplicate bug reports. In this paper, we conduct a large-scale empirical study to understand better the impacts of textual dissimilarity on the detection of duplicate bug reports. First, we determine the performance of three existing techniques in duplicate bug report detection and show that their performance is significantly different for textually similar and textually dissimilar duplicate bug reports. Second, we analyze these two sets of bug reports using descriptive statistics, word embedding visualization, and clustering tendency analysis. We observed that both textually similar and dissimilar duplicate bug reports have comparable clustering tendencies, which indicates similar semantics between any two duplicate bug reports despite their textual differences. Finally, being inspired by the above findings, we apply domain-specific embedding to duplicate bug report detection problems, which not only reduces the performance gap by 13%--15% in terms of F1-measure between textually similar and textually dissimilar duplicate bug reports but also equips us with actionable insights for duplicate bug report detection. 
 
 
 
-## Getting started
+Members : Sigma Jahan, Usmi Mukherjee
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+How to run
+Dataset preprocessing: Run the files from Dataset Pre-processing for Eclipse, Firefox, and Mobile. There are two different preprocessing steps: One for the IR-based approach and another for the ML-based approach. Raw and prepared datasets are also available in the dataset folder.
+Optional argument:
+  -d, --data            DATA
+                        Path to data folder
+  -r, --ratio           SPLIT_RATIO
+                        Split ratio of training data (default: 0.8)
+  -wv, --word_vocab     WORD_VOCAB_SIZE
+                        Word vocabulary size (default: 20,000)
+  -cv, --char_vocab     CHAR_VOCAB_SIZE
+                        Character vocabulary size (default: 100)
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
 
-## Add your files
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
 
-```
-cd existing_repo
-git remote add origin https://git.cs.dal.ca/umukherjee/does-textual-dissimilarity-hinder-duplicate-bug-report-detection-an-empirical-study-replication-package.git
-git branch -M main
-git push -uf origin main
-```
 
-## Integrate with your tools
 
-- [ ] [Set up project integrations](https://git.cs.dal.ca/umukherjee/does-textual-dissimilarity-hinder-duplicate-bug-report-detection-an-empirical-study-replication-package/-/settings/integrations)
 
-## Collaborate with your team
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
 
-## Test and Deploy
+Existing Model Implementation and Evaluation: There are three main python files to run for each dataset. BM25, LDA+GloVE, and Siamese CNN as python files. You can run BM25 on the Jupyter notebook offline but it is required to run LDA+GloVE and Siamese CNN directly using Google Colab with the following system requirements.
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --data            DATA
+                        Path to data folder
+  -b, --baseline        BASELINE
+                        Run with baseline model (default: False)
+  -k, --top_k           TOP_K
+                        Number of top candidates for Recall@k evaluation (default: 25)
+  -e, --epochs          EPOCHS
+                        Number of training epochs (default: 150)
+  -nw, --n_words        NUM_WORDS
+                        Number of words in vocabulary (default: 20,000)
+  -nc, --n_chars        NUM_CHARS
+                        Number of characters in vocabulary (default: 100)
+  -wd, --word_dim       WORD_DIM
+                        Dimension of word embeddings (default: 100)
+  -cd, --char_dim       CHAR_DIM
+                        Dimension of character embeddings (default: 50)
+  -nf, --n_filters      NUM_CNN_FILTERS
+                        Number of filters for CNN (default: 64)
+  -np, --n_prop         NUM_PROPERTIES
+                        Number of properties of the bug report (depending on data sets)
+  -bs, --batch_size     BATCH_SIZE
+                        Batch size of training (default: 2064)
+  -nn, --n_neg          NUM_NEGATIVE_SAMPLES
+                        Number of negative samples (default: 1)
+  -lr, --learning_rate  Learning rate (default: 1e-3)
 
-Use the built-in continuous integration in GitLab.
+Statistical Analysis: Run the file name as stat_analysis from Statistical Analysis folder with the following requirements (PyNonpar & Pingouin)
+Visualization: For the dataset-specific embedding visualization from the folder named Embedding Visualization, run the embedding_visualization python file on Google Colab/Calvert
+Hopkins Statistic: Run the hopkins_stat python file from the folder named Hopkins Statistic on  Google Colab/Calvert
+Proposed Model Implementation and Evaluation: Run the domain_specific_embedding python file from the folder named as Domain-Specific Embedding Model for all three dataset 
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+System Requirements
 
-***
+Python 3.7 - (All the files from the source code are written in python hence .py file)
+PyTorch
+nltk
+kutils 0.3.0.
+gensim
+pyLDAvis
+PyNonpar
+Pingouin
+Tensorflow 2.8.0
+Keras 2.8.0
+Operating System: Windows 10 Home
+PC configuration:  16.0 GB RAM
+Make sure that GloVe is working on your platform. It is recommended to run the ML-based model, GloVe visualization, and Hopkins Statistic test which include GloVe online on platforms such as Google Colab or Calvert
 
-# Editing this README
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+Installation details: 
+Install these packages using command prompt or using Google Colab/Calvert: 
 
-## Name
-Choose a self-explaining name for your project.
+ 
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+ 
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+Required parameters for the operations:
+Dup - Indicates duplicate bug reports
+Sim - indicates textually similar duplicate bug reports
+Dissim - Indicates textually dissimilar duplicate bug reports
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Licensing Information:
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+https://www.freecodecamp.org/news/how-open-source-licenses-work-and-how-to-add-them-to-your-projects-34310c3cf94/
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+(Can get after creating the repo on Gitlab) - Use Apache License 2.0 or MIT license as you wish
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+Something not working as expected?
+Contact: Sigma Jahan (sigma.jahan@dal.ca) ; Usmi Mukherjee (usmi.mukherjee@dal.ca)
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+OR
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Create an issue from here
 
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.

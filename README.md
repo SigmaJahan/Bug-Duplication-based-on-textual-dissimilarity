@@ -1,13 +1,8 @@
 # Project Title: 
 Does Textual Dissimilarity Hinder Duplicate Bug Report Detection? An Empirical Study
 
-# Motivation: 
-Course project of CSCI6308 (Software Maintenance and Evolution)
-
 # Project Description: 
 Duplicate bug reports pose a major overhead during software maintenance since they cost valuable development time and resources. Over the last decade, many automated techniques used Natural Language Processing, Information Retrieval, and Machine Learning methods to detect duplicate bug reports. They often leverage the textual similarity between any two given bug reports to determine their duplication. However, duplicate bug reports are not always guaranteed to be textually similar since many duplicate bugs have different symptoms (i.e., reported differently) but with the same root cause. As a result, the existing techniques might not be sufficient to deal with textually dissimilar duplicate bug reports. In this paper, we conduct a large-scale empirical study to understand better the impacts of textual dissimilarity on the detection of duplicate bug reports. First, we determine the performance of three existing techniques in duplicate bug report detection and show that their performance is significantly different for textually similar and textually dissimilar duplicate bug reports. Second, we analyze these two sets of bug reports using descriptive statistics, word embedding visualization, and clustering tendency analysis. We observed that both textually similar and dissimilar duplicate bug reports have comparable clustering tendencies, which indicates similar semantics between any two duplicate bug reports despite their textual differences. Finally, being inspired by the above findings, we apply domain-specific embedding to duplicate bug report detection problems, which not only reduces the performance gap by 13%--15% in terms of F1-measure between textually similar and textually dissimilar duplicate bug reports but also equips us with actionable insights for duplicate bug report detection. 
-
-
 
 # Members : 
 Sigma Jahan, Usmi Mukherjee
@@ -25,15 +20,6 @@ Optional argument:
                          Word vocabulary size (default: 20,000)
 -   -cv, --char_vocab     CHAR_VOCAB_SIZE
                          Character vocabulary size (default: 100)
-
-
-
-
-
-
-
-
-
 
 
 2. Existing Model Implementation and Evaluation: 
@@ -96,11 +82,8 @@ Run the domain_specific_embedding python file from the folder named as Domain-Sp
 - Make sure that GloVe is working on your platform. It is recommended to run the ML-based model, GloVe visualization, and Hopkins Statistic test which include GloVe online on platforms such as Google Colab or Calvert
 
 
-
-
 # Installation details: 
 Install these packages using command prompt or using Google Colab/Calvert: 
-
  
 - pip install PyNonpar
 - pip install Pingouin
@@ -117,9 +100,6 @@ Install these packages using command prompt or using Google Colab/Calvert:
 
 
  
-
-
-
 Required parameters for the operations:
 - Dup - Indicates duplicate bug reports
 - Sim - indicates textually similar duplicate bug reports
@@ -137,5 +117,5 @@ Contact: Sigma Jahan (sigma.jahan@dal.ca) ; Usmi Mukherjee (usmi.mukherjee@dal.c
 
 OR
 
-Create an issue from here
+Create an issue from here!
 
